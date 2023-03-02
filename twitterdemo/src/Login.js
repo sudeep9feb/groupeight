@@ -9,7 +9,7 @@ function Login() {
         username: Yup.string().required("username is required")
             .min(5, "no less than 5 characters").max(15, "no more than 15 characters"),
         email: Yup.string().required("Email is required").email("Email is not valid"),
-        password: Yup.string().required("Password is required")
+        password: Yup.string().required("Password is required").matches(/^(?!.*@[^,]*,)/, "One special character required")
     })
 
     const formik = useFormik({
