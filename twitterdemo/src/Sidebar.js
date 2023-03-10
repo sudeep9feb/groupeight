@@ -1,12 +1,17 @@
-import { Box, Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack } from '@mui/material'
+import { Box, Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Modal, Stack } from '@mui/material'
 import React from 'react'
 import HomeIcon from '@mui/icons-material/Home';
 import ForumIcon from '@mui/icons-material/Forum';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ComposeTweet from './ComposeTweet';
 
 function Sidebar() {
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
     return (
         <Box
             flex={1}
@@ -51,10 +56,17 @@ function Sidebar() {
                         <ListItemText primary="SignOut" />
                     </ListItemButton>
                 </List>
-                <Button variant='contained'
+                <Button variant='contained' onClick={handleOpen}
                     sx={{ borderRadius: "24px" }}>
                     Tweet
                 </Button>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+                >
+                    <ComposeTweet />
+                </Modal>
             </Stack>
         </Box>
     )
